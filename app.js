@@ -20,6 +20,11 @@ connectDb();
 app.set("port", process.env.PORT || 4000);
 
 /* Middlewares */
+// Antes de cada pedido se asegura de que haya conexión a la base (y reintenta si se cayó)
+app.use(async (req, res, next) => {
+  await connectDb();
+  next();
+});
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

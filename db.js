@@ -4,23 +4,26 @@ import "dotenv/config";
 
 // DB Connection
 const connectDb = async () => {
+  // Si ya está conectada no hace nada (se llama antes de cada pedido)
+  if (mongoose.connection.readyState === 1) return;
+
   let connectionString = process.env.DB_PROTOCOL;
   if (process.env.DB_USER && process.env.DB_PASS) {
     connectionString += `${encodeURIComponent(process.env.DB_USER)}:${encodeURIComponent(process.env.DB_PASS)}@`;
   }
   connectionString += `${process.env.DB_HOST}/${process.env.DB_NAME}`;
 
-  mongoose
-    .connect(`${connectionString}?retryWrites=true&w=majority`, {
+  try {
+    await mongoose.connect(`${connectionString}?retryWrites=true&w=majority`, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-    })
-    .then(() => console.log(chalk.green("Conected to database")))
-    .catch((err) =>
-      console.log(
-        chalk.bgRed.white("Database not connected:", err.name, "-", err.message)
-      )
+    });
+    console.log(chalk.green("Conected to database"));
+  } catch (err) {
+    console.log(
+      chalk.bgRed.white("Database not connected:", err.name, "-", err.message)
     );
+  }
 };
 
 const disconnectDb = async () => {
