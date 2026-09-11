@@ -54,7 +54,11 @@ app.use(function (err, req, res, next) {
   res.send({ message: err.message || "error" });
 });
 
-/* Starting server */
-app.listen(app.get("port"), () => {
-  console.log(`Server on port ${app.get("port")}`);
-});
+/* Starting server: en tu PC escucha en el puerto; en Vercel se usa el export */
+if (!process.env.VERCEL) {
+  app.listen(app.get("port"), () => {
+    console.log(`Server on port ${app.get("port")}`);
+  });
+}
+
+export default app;
