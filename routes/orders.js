@@ -7,7 +7,7 @@ const addOrder = async (req, res) => {
   try {
     const order = new Order(req.body);
     await order.save();
-    return res.status(200).send({ mesaage: "Orden creada", order });
+    return res.status(200).send({ message: "Orden creada", order });
   } catch (error) {
     return res.status(500).send({ message: "Hubo un error", error: error.message });
   }
