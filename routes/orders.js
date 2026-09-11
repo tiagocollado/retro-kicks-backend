@@ -9,7 +9,7 @@ const addOrder = async (req, res) => {
     await order.save();
     return res.status(200).send({ mesaage: "Orden creada", order });
   } catch (error) {
-    return res.status(501).send({ message: "Hubo un error", error });
+    return res.status(500).send({ message: "Hubo un error", error: error.message });
   }
 };
 

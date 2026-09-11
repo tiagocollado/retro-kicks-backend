@@ -11,7 +11,7 @@ const findAllProducts = async (req, res) => {
       .status(200)
       .send({ message: "Todos los productos", products: products });
   } catch (error) {
-    return res.status(501).send({ message: "Hubo un error", error });
+    return res.status(500).send({ message: "Hubo un error", error: error.message });
   }
 };
 
@@ -23,7 +23,7 @@ const findOneProduct = async (req, res) => {
     );
     return res.status(200).send({ message: "Producto encontrado", product });
   } catch (error) {
-    return res.status(501).send({ message: "Hubo un error", error });
+    return res.status(500).send({ message: "Hubo un error", error: error.message });
   }
 };
 
@@ -64,7 +64,7 @@ const addProduct = async (req, res) => {
     await product.save();
     return res.status(200).send({ message: "Producto creado", product });
   } catch (error) {
-    return res.status(501).send({ message: "Hubo un error", error });
+    return res.status(500).send({ message: "Hubo un error", error: error.message });
   }
 };
 
@@ -81,7 +81,7 @@ const deleteProduct = async (req, res) => {
       .status(200)
       .send({ message: "Producto borrado", product: productToDelete });
   } catch (error) {
-    return res.status(501).send({ message: "Hubo un error", error });
+    return res.status(500).send({ message: "Hubo un error", error: error.message });
   }
 };
 
@@ -169,7 +169,7 @@ const updateProduct = async (req, res) => {
       .status(200)
       .send({ message: "Producto actualizado", product: productToUpdate });
   } catch (error) {
-    return res.status(501).send({ message: "Hubo un error", error });
+    return res.status(500).send({ message: "Hubo un error", error: error.message });
   }
 };
 
