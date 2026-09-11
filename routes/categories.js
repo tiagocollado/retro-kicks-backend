@@ -11,7 +11,7 @@ router.post("/", async (req, res) => {
     await category.save();
     return res.status(201).send({ message: "Categoría creada", category });
   } catch (error) {
-    return res.status(500).send({ message: "Hubo un error", error });
+    return res.status(500).send({ message: "Hubo un error", error: error.message });
   }
 });
 
@@ -23,7 +23,7 @@ router.get("/", async (_req, res) => {
       .status(200)
       .send({ message: "Todas las categorías", categories });
   } catch (error) {
-    return res.status(500).send({ message: "Hubo un error", error });
+    return res.status(500).send({ message: "Hubo un error", error: error.message });
   }
 });
 
@@ -50,7 +50,7 @@ router.get("/:key", async (req, res) => {
       products,
     });
   } catch (error) {
-    return res.status(500).send({ message: "Hubo un error", error });
+    return res.status(500).send({ message: "Hubo un error", error: error.message });
   }
 });
 

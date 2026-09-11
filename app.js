@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import createError from "http-errors";
 import indexRoutes from "./routes/index.js";
 import productsRoutes from "./routes/products.js";
 import categoriesRoutes from "./routes/categories.js";
@@ -37,10 +38,10 @@ app.use(
 );
 
 /* Routes */
-app.use("/", indexRoutes);
-app.use("/products", productsRoutes);
-app.use("/categories", categoriesRoutes);
-app.use("/orders", ordersRoutes);
+app.use("/api", indexRoutes);
+app.use("/api/products", productsRoutes);
+app.use("/api/categories", categoriesRoutes);
+app.use("/api/orders", ordersRoutes);
 
 /* Error handler  */
 // catch 404 and forward to error handler

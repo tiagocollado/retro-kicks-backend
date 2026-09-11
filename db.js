@@ -6,7 +6,7 @@ import "dotenv/config";
 const connectDb = async () => {
   let connectionString = process.env.DB_PROTOCOL;
   if (process.env.DB_USER && process.env.DB_PASS) {
-    connectionString += `${process.env.DB_USER}:${process.env.DB_PASS}@`;
+    connectionString += `${encodeURIComponent(process.env.DB_USER)}:${encodeURIComponent(process.env.DB_PASS)}@`;
   }
   connectionString += `${process.env.DB_HOST}/${process.env.DB_NAME}`;
 
@@ -18,7 +18,7 @@ const connectDb = async () => {
     .then(() => console.log(chalk.green("Conected to database")))
     .catch((err) =>
       console.log(
-        chalk.bgRed.white("Database not connected", err.code, err.input)
+        chalk.bgRed.white("Database not connected:", err.name, "-", err.message)
       )
     );
 };
