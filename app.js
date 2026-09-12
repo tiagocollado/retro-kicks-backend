@@ -43,6 +43,7 @@ app.use(
 );
 
 /* Routes */
+app.use("/", indexRoutes); // "API Works!" también en la raíz
 app.use("/api", indexRoutes);
 app.use("/api/products", productsRoutes);
 app.use("/api/categories", categoriesRoutes);
